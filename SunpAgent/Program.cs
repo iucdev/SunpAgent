@@ -103,12 +103,12 @@ public class Program {
         } else {
             logger.LogInformation("Collecting measurements...");
             collectedTankMeasurements.AddRange(measurementData.Select(i => new TankMeasurementData {
-                MeasurementDate = i.DatetimeStamp ?? DateTime.Now,
-                Mass = Convert.ToDecimal(i.Mass),
-                Volume = Convert.ToDecimal(i.Volume),
-                Level = Convert.ToDecimal(i.Level),
-                Density = Convert.ToDecimal(i.Density),
-                Temperature = Convert.ToDecimal(i.Temperature)
+                MeasurementDate = DateTime.Now,
+                Mass = CommonHelper.TryParseDecimal(i.Mass),
+                Volume = CommonHelper.TryParseDecimal(i.Volume),
+                Level = CommonHelper.TryParseDecimal(i.Level),
+                Density = CommonHelper.TryParseDecimal(i.Density),
+                Temperature = CommonHelper.TryParseDecimal(i.Temperature)
             }));
             logger.LogInformation("Measurements collected {0}", collectedTankMeasurements.Count());
         }
@@ -152,9 +152,9 @@ public class Program {
                 MeasurementDate = DateTime.Now,
                 StartDate = i.StartTime,
                 EndDate = i.EndTime,
-                Level = Convert.ToDecimal(i.Level),
-                Mass = Convert.ToDecimal(i.Mass),
-                Volume = Convert.ToDecimal(i.Volume)
+                Level = CommonHelper.TryParseDecimal(i.Level ?? 0),
+                Mass = CommonHelper.TryParseDecimal(i.Mass ?? 0),
+                Volume = CommonHelper.TryParseDecimal(i.Volume ?? 0)
             }));
             logger.LogInformation("Transfers collected {0}", collectedTankTransfers.Count());
         }

@@ -1,10 +1,27 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Sunp.Api.Client;
 
 namespace SunpAgent.Helpers {
     public static class CommonHelper {
+        public static decimal TryParseDecimal(string valAsString) {
+            try {
+                return Convert.ToDecimal(valAsString, CultureInfo.InvariantCulture);
+            } catch (Exception ex) {
+                throw new Exception($"It wasn't possible to convert string {valAsString} to decimal");
+            }
+        }
+        
+        public static decimal TryParseDecimal(double valAsDouble) {
+            try {
+                return Convert.ToDecimal(valAsDouble, CultureInfo.InvariantCulture);
+            } catch (Exception ex) {
+                throw new Exception($"It wasn't possible to convert double {valAsDouble} to decimal");
+            }
+        }
+
         public static string SaveToFile(this SendTankIndicatorsRequestBody tankIndicatorsRequestBody, ILogger logger) {
             try {
                 var json = JsonConvert.SerializeObject(tankIndicatorsRequestBody);
