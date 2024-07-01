@@ -16,6 +16,3 @@
 1. Заполните конфиг в appsettings.json
 2. Выполните Publish версии win-x86 или win-x64
 3. Запустите SunpAgent\bin\Release\net8.0\win-(x86 или x64)\publish\SunpAgent.exe
-
-Для отправки данных с Sens:
-1. В разработке...
